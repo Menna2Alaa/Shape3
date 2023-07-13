@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Onboarding Screens</string>
+    <string name="onboarding">onboarding description</string>
+    <string name="button">onboarding button text</string>
+
+</resources>
