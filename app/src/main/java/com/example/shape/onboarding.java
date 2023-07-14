@@ -12,18 +12,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class onboarding extends AppCompatActivity {
-    private TextView textView1;
-    private TextView textView2;
-    private Button button;
     public static final String SharedPreferences="shared_preferences";
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.onboarding);
-        textView1=findViewById(R.id.text1);
-        textView2=findViewById(R.id.text2);
-        button=findViewById(R.id.button);
+        TextView textView1 = findViewById(R.id.text1);
+        TextView textView2 = findViewById(R.id.text2);
+        Button button = findViewById(R.id.button);
 
 
         SharedPreferences pref= getBaseContext().getSharedPreferences("pref", Context.MODE_PRIVATE);
@@ -31,15 +28,16 @@ public class onboarding extends AppCompatActivity {
         Boolean bol = pref.getBoolean("my_boolean_key",false);
         if(bol==true)
         {
-
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
         }
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                editor.putBoolean("my_boolean_key",true);
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-            }
+        button.setOnClickListener(view -> {
+            editor.putBoolean("my_boolean_key",true);
+            editor.apply();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            onboarding.this.finish();
         });
     }
 }
